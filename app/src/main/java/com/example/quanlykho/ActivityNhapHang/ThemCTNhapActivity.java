@@ -33,7 +33,7 @@ public class ThemCTNhapActivity extends AppCompatActivity {
                 ctNhapHang.setSoLuong(Integer.parseInt(edtSoLuong.getText().toString()));
                 ctNhapHang.setDonViTinh(edtDonViTinh.getText().toString());
                 ctNhapHang.setLoaiHH(edtLoaiHH.getText().toString());
-                ctNhapHang.setKichThuoc(Float.parseFloat(edtKichThuoc.getText().toString()));
+                ctNhapHang.setKichThuoc(edtKichThuoc.getText().toString());
                 ctNhapHang.setTenHH(edtTenHH.getText().toString());
                 ctNhapHangDAO.insert(ctNhapHang);
                 finish();

@@ -3,7 +3,7 @@ package com.example.quanlykho.Entity;
 public class CTNhapHang {
     private int id;
     private String tenHH, loaiHH;
-    private float kichThuoc;
+    private String kichThuoc;
     private int soLuong;
     private String donViTinh;
     private int idNhapHang;
@@ -36,11 +36,11 @@ public class CTNhapHang {
         this.loaiHH = loaiHH;
     }
 
-    public float getKichThuoc() {
+    public String getKichThuoc() {
         return kichThuoc;
     }
 
-    public void setKichThuoc(float kichThuoc) {
+    public void setKichThuoc(String kichThuoc) {
         this.kichThuoc = kichThuoc;
     }
 
@@ -68,7 +68,7 @@ public class CTNhapHang {
         this.idNhapHang = idNhapHang;
     }
 
-    public CTNhapHang(int id, String tenHH, String loaiHH, float kichThuoc, int soLuong, String donViTinh, int idNhapHang) {
+    public CTNhapHang(int id, String tenHH, String loaiHH, String kichThuoc, int soLuong, String donViTinh, int idNhapHang) {
         this.id = id;
         this.tenHH = tenHH;
         this.loaiHH = loaiHH;

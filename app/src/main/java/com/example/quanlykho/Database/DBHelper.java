@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "id integer primary key autoincrement," +
                 "tenHH nvarchar(50)," +
                 "loaiHH nvarchar(50)," +
-                "kichThuoc float," +
+                "kichThuoc nvarchar(50),"+
                 "soLuong integer," +
                 "donViTinh nvarchar(50)," +
                 "idNhapHang integer)");

@@ -37,7 +37,7 @@ public class CTNhapHangDAO {
             ctNhapHang.setId(cursor.getInt(0));
             ctNhapHang.setTenHH(cursor.getString(1));
             ctNhapHang.setLoaiHH(cursor.getString(2));
-            ctNhapHang.setKichThuoc(cursor.getFloat(3));
+            ctNhapHang.setKichThuoc(cursor.getString(3));
             ctNhapHang.setSoLuong(cursor.getInt(4));
             ctNhapHang.setDonViTinh(cursor.getString(5));
             ctNhapHang.setIdNhapHang(cursor.getInt(6));
@@ -68,7 +68,7 @@ public class CTNhapHangDAO {
         ctNhapHang.setId(cursor.getInt(0));
         ctNhapHang.setTenHH(cursor.getString(1));
         ctNhapHang.setLoaiHH(cursor.getString(2));
-        ctNhapHang.setKichThuoc(cursor.getFloat(3));
+        ctNhapHang.setKichThuoc(cursor.getString(3));
         ctNhapHang.setSoLuong(cursor.getInt(4));
         ctNhapHang.setDonViTinh(cursor.getString(5));
         ctNhapHang.setIdNhapHang(cursor.getInt(6));
