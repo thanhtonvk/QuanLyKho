@@ -35,6 +35,7 @@ public class ThemCTXuatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_ctxuat);
         anhXaView();
+        loadData();
         ctXuatHangDAO = new CTXuatHangDAO(getApplicationContext());
         ctNhapHangList = ctXuatHangDAO.getAllCTNhapHang();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ctNhapHangList);
@@ -58,17 +59,33 @@ public class ThemCTXuatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CTXuatHang ctXuatHang = new CTXuatHang();
                 ctXuatHang.setIdXuatHang(Common.xuatHang.getId());
-                ctXuatHang.setIdCTNhapHang(ctNhapHang.getId());
-                ctXuatHang.setSoLuong(Integer.parseInt(edtSoLuong.getText().toString()));
-                if(ctXuatHangDAO.addXuatHang(ctXuatHang)>0){
-                    Toast.makeText(getApplicationContext(),"Thêm thành công",Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Số lượng không đủ",Toast.LENGTH_LONG).show();
+                if (ctNhapHang != null) {
+                    ctXuatHang.setIdCTNhapHang(ctNhapHang.getId());
+                } else {
+                    ctXuatHang.setIdCTNhapHang(Common.ctXuatHang.getIdCTNhapHang());
                 }
 
-
+                ctXuatHang.setSoLuong(Integer.parseInt(edtSoLuong.getText().toString()));
+                if (ctXuatHangDAO.addXuatHang(ctXuatHang, Common.isUpdate) > 0) {
+                    Toast.makeText(getApplicationContext(), "Thành công", Toast.LENGTH_LONG).show();
+                    ctNhapHangList = ctXuatHangDAO.getAllCTNhapHang();
+                    adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, ctNhapHangList);
+                    lvHangHoa.setAdapter(adapter);
+                    Common.isUpdate = false;
+                } else {
+                    Toast.makeText(getApplicationContext(), "Số lượng không đủ", Toast.LENGTH_LONG).show();
+                    Common.isUpdate = false;
+                }
             }
         });
+    }
+
+    private void loadData() {
+        if (Common.isUpdate) {
+            edtTenHH.setText(Common.ctXuatHang.getTenHH());
+            edtSoLuong.setText(Common.ctXuatHang.getSoLuong() + "");
+            btnThem.setText("Sửa");
+        }
     }
 
     private void anhXaView() {
@@ -77,5 +94,11 @@ public class ThemCTXuatActivity extends AppCompatActivity {
         btnThem = findViewById(R.id.btnThem);
         btnThoat = findViewById(R.id.btnThoat);
         lvHangHoa = findViewById(R.id.lvHangHoa);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), QuanLyChiTietXuatHangActivity.class));
+        finish();
     }
 }

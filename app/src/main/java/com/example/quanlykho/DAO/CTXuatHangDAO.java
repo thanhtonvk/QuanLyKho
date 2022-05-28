@@ -69,7 +69,7 @@ public class CTXuatHangDAO {
         return ctXuatHangList;
     }
 
-    public int addXuatHang(CTXuatHang ctXuatHang) {
+    public int addXuatHang(CTXuatHang ctXuatHang, boolean isUpdate) {
         ContentValues values = new ContentValues();
         values.put("idXuatHang", ctXuatHang.getIdXuatHang());
         values.put("idCTNhapHang", ctXuatHang.getIdCTNhapHang());
@@ -80,18 +80,28 @@ public class CTXuatHangDAO {
         if (ctXuatHang.getSoLuong() > ctNhapHang.getSoLuong()) {
             return -1;
         } else {
-            database.insert("CTXuatHang", null, values);
-            ctNhapHang.setSoLuong(ctNhapHang.getSoLuong() - ctXuatHang.getSoLuong());
-            ContentValues valueCTNhapHang = new ContentValues();
-            valueCTNhapHang.put("id", ctNhapHang.getId());
-            valueCTNhapHang.put("tenHH", ctNhapHang.getTenHH());
-            valueCTNhapHang.put("loaiHH", ctNhapHang.getLoaiHH());
-            valueCTNhapHang.put("kichThuoc", ctNhapHang.getKichThuoc());
-            valueCTNhapHang.put("soLuong", ctNhapHang.getSoLuong());
-            valueCTNhapHang.put("donViTinh", ctNhapHang.getDonViTinh());
-            valueCTNhapHang.put("idNhapHang", ctNhapHang.getIdNhapHang());
-            return database.update("CTNhapHang", valueCTNhapHang, "id = ?", new String[]{ctNhapHang.getId() + ""});
+            if (isUpdate) {
+                values.put("id", ctXuatHang.getId());
+                return database.update("CTXuatHang", values, "id = ?", new String[]{ctNhapHang.getId() + ""});
+            } else {
+                database.insert("CTXuatHang", null, values);
+                ctNhapHang.setSoLuong(ctNhapHang.getSoLuong() - ctXuatHang.getSoLuong());
+                ContentValues valueCTNhapHang = new ContentValues();
+                valueCTNhapHang.put("id", ctNhapHang.getId());
+                valueCTNhapHang.put("tenHH", ctNhapHang.getTenHH());
+                valueCTNhapHang.put("loaiHH", ctNhapHang.getLoaiHH());
+                valueCTNhapHang.put("kichThuoc", ctNhapHang.getKichThuoc());
+                valueCTNhapHang.put("soLuong", ctNhapHang.getSoLuong());
+                valueCTNhapHang.put("donViTinh", ctNhapHang.getDonViTinh());
+                valueCTNhapHang.put("idNhapHang", ctNhapHang.getIdNhapHang());
+                return database.update("CTNhapHang", valueCTNhapHang, "id = ?", new String[]{ctNhapHang.getId() + ""});
+            }
+
         }
+    }
+
+    public void delete(int id) {
+        database.delete("CTXuatHang", "id = ?", new String[]{id + ""});
     }
 
 }

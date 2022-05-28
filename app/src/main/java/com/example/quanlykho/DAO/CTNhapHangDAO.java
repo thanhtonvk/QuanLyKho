@@ -48,16 +48,25 @@ public class CTNhapHangDAO {
         return ctNhapHangList;
     }
 
-    public void insert(CTNhapHang ctNhapHang) {
+    public void insert(CTNhapHang ctNhapHang, boolean isUpdate) {
         ContentValues values = new ContentValues();
-
         values.put("tenHH", ctNhapHang.getTenHH());
         values.put("loaiHH", ctNhapHang.getLoaiHH());
         values.put("kichThuoc", ctNhapHang.getKichThuoc());
         values.put("soLuong", ctNhapHang.getSoLuong());
         values.put("donViTinh", ctNhapHang.getDonViTinh());
         values.put("idNhapHang", ctNhapHang.getIdNhapHang());
-        database.insert("CTNhapHang", null, values);
+        if (isUpdate) {
+            values.put("id", ctNhapHang.getId());
+            database.update("CTNhapHang", values, "id = ?", new String[]{ctNhapHang.getId() + ""});
+        } else {
+            database.insert("CTNhapHang", null, values);
+        }
+
+    }
+
+    public void delete(int id) {
+        database.delete("CTNhapHang", "id = ?", new String[]{id + ""});
     }
 
     public CTNhapHang getCTNhapHang(int id) {

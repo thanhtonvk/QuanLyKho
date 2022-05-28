@@ -3,6 +3,7 @@ package com.example.quanlykho.ActivityNhapHang;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.example.quanlykho.R;
 
 public class ThemCTNhapActivity extends AppCompatActivity {
     EditText edtTenHH, edtLoaiHH, edtKichThuoc, edtSoLuong, edtDonViTinh;
+    Button btnThem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,12 @@ public class ThemCTNhapActivity extends AppCompatActivity {
         edtSoLuong = findViewById(R.id.edtSoLuong);
         edtDonViTinh = findViewById(R.id.edtDonViTinh);
         CTNhapHangDAO ctNhapHangDAO = new CTNhapHangDAO(getApplicationContext());
-        findViewById(R.id.btnThem).setOnClickListener(new View.OnClickListener() {
+        loadDuLieu();
+        btnThem = findViewById(R.id.btnThem);
+        if (Common.isUpdate) {
+            btnThem.setText("Sửa");
+        }
+        btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CTNhapHang ctNhapHang = new CTNhapHang();
@@ -35,10 +42,21 @@ public class ThemCTNhapActivity extends AppCompatActivity {
                 ctNhapHang.setLoaiHH(edtLoaiHH.getText().toString());
                 ctNhapHang.setKichThuoc(edtKichThuoc.getText().toString());
                 ctNhapHang.setTenHH(edtTenHH.getText().toString());
-                ctNhapHangDAO.insert(ctNhapHang);
+                ctNhapHangDAO.insert(ctNhapHang, Common.isUpdate);
+                Common.isUpdate = false;
                 finish();
                 startActivity(new Intent(getApplicationContext(), QuanLyChiTietNhapHangActivity.class));
             }
         });
+    }
+
+    private void loadDuLieu() {
+        if (Common.isUpdate) {
+            edtTenHH.setText(Common.ctNhapHang.getTenHH());
+            edtLoaiHH.setText(Common.ctNhapHang.getLoaiHH());
+            edtKichThuoc.setText(Common.ctNhapHang.getKichThuoc() + "");
+            edtSoLuong.setText(Common.ctNhapHang.getSoLuong() + "");
+            edtDonViTinh.setText(Common.ctNhapHang.getDonViTinh());
+        }
     }
 }
