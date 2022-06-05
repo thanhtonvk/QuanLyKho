@@ -52,11 +52,14 @@ public class ThemCTNhapActivity extends AppCompatActivity {
 
     private void loadDuLieu() {
         if (Common.isUpdate) {
-            edtTenHH.setText(Common.ctNhapHang.getTenHH());
-            edtLoaiHH.setText(Common.ctNhapHang.getLoaiHH());
-            edtKichThuoc.setText(Common.ctNhapHang.getKichThuoc() + "");
-            edtSoLuong.setText(Common.ctNhapHang.getSoLuong() + "");
-            edtDonViTinh.setText(Common.ctNhapHang.getDonViTinh());
+            if(Common.ctNhapHang!=null){
+                edtTenHH.setText(Common.ctNhapHang.getTenHH());
+                edtLoaiHH.setText(Common.ctNhapHang.getLoaiHH());
+                edtKichThuoc.setText(Common.ctNhapHang.getKichThuoc() + "");
+                edtSoLuong.setText(Common.ctNhapHang.getSoLuong() + "");
+                edtDonViTinh.setText(Common.ctNhapHang.getDonViTinh());
+            }
+
         }
     }
 }

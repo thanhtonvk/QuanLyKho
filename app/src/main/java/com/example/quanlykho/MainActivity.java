@@ -27,5 +27,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), QuanLyXuatHangActivity.class));
             }
         });
+        findViewById(R.id.btn_thongke).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),ThongKeActivity.class));
+            }
+        });
     }
 }

@@ -69,6 +69,27 @@ public class CTXuatHangDAO {
         return ctXuatHangList;
     }
 
+    public List<CTXuatHang> getAllXuatHang() {
+
+        String query = "select CTXuatHang.id,XuatHang.id,CTXuatHang.soLuong,CTNhapHang.tenHH,CTNhapHang.loaiHH,CTNhapHang.kichThuoc,CTNhapHang.donViTinh from XuatHang,CTXuatHang,CTNhapHang where XuatHang.id = CTXuatHang.idXuatHang and CTXuatHang.idCTNhapHang = CTNhapHang.id";
+        Cursor cursor = database.rawQuery(query, null);
+        List<CTXuatHang> ctXuatHangList = new ArrayList<>();
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            CTXuatHang ctXuatHang = new CTXuatHang();
+            ctXuatHang.setId(cursor.getInt(0));
+            ctXuatHang.setIdXuatHang(cursor.getInt(1));
+            ctXuatHang.setSoLuong(cursor.getInt(2));
+            ctXuatHang.setTenHH(cursor.getString(3));
+            ctXuatHang.setLoaiHH(cursor.getString(4));
+            ctXuatHang.setKichThuoc(cursor.getFloat(5));
+            ctXuatHang.setDonViTinh(cursor.getString(6));
+            cursor.moveToNext();
+            ctXuatHangList.add(ctXuatHang);
+        }
+        return ctXuatHangList;
+    }
+
     public int addXuatHang(CTXuatHang ctXuatHang, boolean isUpdate) {
         ContentValues values = new ContentValues();
         values.put("idXuatHang", ctXuatHang.getIdXuatHang());

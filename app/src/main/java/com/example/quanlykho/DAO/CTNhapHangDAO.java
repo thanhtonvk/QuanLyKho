@@ -73,14 +73,36 @@ public class CTNhapHangDAO {
         Cursor cursor = database.rawQuery("select * from CTNhapHang where id=" + id, null);
         cursor.moveToFirst();
         CTNhapHang ctNhapHang = new CTNhapHang();
-        ctNhapHang.setId(cursor.getInt(0));
-        ctNhapHang.setId(cursor.getInt(0));
-        ctNhapHang.setTenHH(cursor.getString(1));
-        ctNhapHang.setLoaiHH(cursor.getString(2));
-        ctNhapHang.setKichThuoc(cursor.getString(3));
-        ctNhapHang.setSoLuong(cursor.getInt(4));
-        ctNhapHang.setDonViTinh(cursor.getString(5));
-        ctNhapHang.setIdNhapHang(cursor.getInt(6));
+        while (!cursor.isAfterLast()) {
+            ctNhapHang.setId(cursor.getInt(0));
+            ctNhapHang.setTenHH(cursor.getString(1));
+            ctNhapHang.setLoaiHH(cursor.getString(2));
+            ctNhapHang.setKichThuoc(cursor.getString(3));
+            ctNhapHang.setSoLuong(cursor.getInt(4));
+            ctNhapHang.setDonViTinh(cursor.getString(5));
+            ctNhapHang.setIdNhapHang(cursor.getInt(6));
+            cursor.moveToNext();
+        }
         return ctNhapHang;
+    }
+
+    public List<CTNhapHang> getAllCTNhapHang() {
+        Cursor cursor = database.rawQuery("select * from CTNhapHang", null);
+        cursor.moveToFirst();
+        List<CTNhapHang> ctNhapHangList = new ArrayList<>();
+        while (!cursor.isAfterLast()) {
+            CTNhapHang ctNhapHang = new CTNhapHang();
+            ctNhapHang.setId(cursor.getInt(0));
+            ctNhapHang.setTenHH(cursor.getString(1));
+            ctNhapHang.setLoaiHH(cursor.getString(2));
+            ctNhapHang.setKichThuoc(cursor.getString(3));
+            ctNhapHang.setSoLuong(cursor.getInt(4));
+            ctNhapHang.setDonViTinh(cursor.getString(5));
+            ctNhapHang.setIdNhapHang(cursor.getInt(6));
+            ctNhapHangList.add(ctNhapHang);
+            cursor.moveToNext();
+        }
+        Log.e("logra", String.valueOf(ctNhapHangList.size()));
+        return ctNhapHangList;
     }
 }

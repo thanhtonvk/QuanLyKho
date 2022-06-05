@@ -64,7 +64,6 @@ public class ThemCTXuatActivity extends AppCompatActivity {
                 } else {
                     ctXuatHang.setIdCTNhapHang(Common.ctXuatHang.getIdCTNhapHang());
                 }
-
                 ctXuatHang.setSoLuong(Integer.parseInt(edtSoLuong.getText().toString()));
                 if (ctXuatHangDAO.addXuatHang(ctXuatHang, Common.isUpdate) > 0) {
                     Toast.makeText(getApplicationContext(), "Thành công", Toast.LENGTH_LONG).show();
@@ -82,9 +81,12 @@ public class ThemCTXuatActivity extends AppCompatActivity {
 
     private void loadData() {
         if (Common.isUpdate) {
-            edtTenHH.setText(Common.ctXuatHang.getTenHH());
-            edtSoLuong.setText(Common.ctXuatHang.getSoLuong() + "");
-            btnThem.setText("Sửa");
+            if(Common.ctXuatHang!=null){
+                edtTenHH.setText(Common.ctXuatHang.getTenHH());
+                edtSoLuong.setText(Common.ctXuatHang.getSoLuong() + "");
+                btnThem.setText("Sửa");
+            }
+
         }
     }
 

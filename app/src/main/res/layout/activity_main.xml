@@ -24,8 +24,9 @@
         <Button
             android:id="@+id/btnNhap"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_margin="20dp"
+            android:layout_weight="1"
             android:background="#42A5F5"
             android:text="Quản lý nhập hàng"
             android:textColor="@color/white" />
@@ -33,10 +34,21 @@
         <Button
             android:id="@+id/btnXuat"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_margin="20dp"
+            android:layout_weight="1"
             android:background="#26A69A"
             android:text="Quản lý xuất hàng"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_thongke"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="#E64A19"
+            android:text="Thống kê"
             android:textColor="@color/white" />
     </LinearLayout>
 
